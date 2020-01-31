@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/lib/ojdbc10.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file:///opt/sqldeveloper" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file:///opt/sqldeveloper" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$USER_HOME$/app/anton/product/11.2.0/dbhome_1" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$USER_HOME$/app/anton/product/11.2.0/dbhome_1/javavm/demo/examples/jsproc/basic/basic_kprb" />
+          <root url="file://$USER_HOME$/app/anton/product/11.2.0/dbhome_1/javavm/demo/examples/jsproc/basic/basic_thin" />
+          <root url="file://$USER_HOME$/app/anton/product/11.2.0/dbhome_1/javavm/demo/examples/jsproc/basic/helloWorld" />
+          <root url="file://$USER_HOME$/app/anton/product/11.2.0/dbhome_1/javavm/demo/examples/jsproc/basic/instance_methods" />
+          <root url="file://$USER_HOME$/app/anton/product/11.2.0/dbhome_1/javavm/demo/examples/jsproc/basic/ncomp" />
+          <root url="file://$USER_HOME$/app/anton/product/11.2.0/dbhome_1/javavm/demo/examples/jsproc/basic/objbyref" />
+          <root url="file://$USER_HOME$/app/anton/product/11.2.0/dbhome_1/javavm/demo/examples/jsproc/basic/objbyvalue" />
+          <root url="file://$USER_HOME$/app/anton/product/11.2.0/dbhome_1/javavm/demo/examples/jsproc/basic/object" />
+          <root url="file://$USER_HOME$/app/anton/product/11.2.0/dbhome_1/javavm/demo/jmx" />
+          <root url="file://$USER_HOME$/app/anton/product/11.2.0/dbhome_1/javavm/demo/policytable" />
+          <root url="file://$USER_HOME$/app/anton/product/11.2.0/dbhome_1/javavm/jahome" />
+          <root url="file://$USER_HOME$/app/anton/product/11.2.0/dbhome_1/owb/bin/admin" />
+          <root url="file://$USER_HOME$/app/anton/product/11.2.0/dbhome_1/owb/jrt/default-web-app/WEB-INF/classes" />
+          <root url="file://$USER_HOME$/app/anton/product/11.2.0/dbhome_1/owb/jrt/default-web-app/examples/jsp/plugin/applet" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/app/anton/product/11.2.0/dbhome_1/ord/jlib/ordim.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/lib/ordim.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/lib/sdoapi.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/src/lib/javafx" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/src/lib/javafx" recursive="false" />
+      </library>
+    </orderEntry>
+  </component>
+</module>

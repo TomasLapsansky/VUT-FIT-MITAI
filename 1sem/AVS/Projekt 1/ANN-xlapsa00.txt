@@ -1,0 +1,107 @@
+Architektura výpočetních systému (AVS 2019)
+Projekt č. 1 (ANN)
+Login: xlapsa00
+
+U každého kroku proveďte měření vypočtu pro dataset dostupný na https://www.fit.vutbr.cz/~ibordovsky/avs/datasets/bigDataset.h5
+Správnost výpočtu můžete porovnat pomocí python 3 skriptu "Scripts/compareOutputs.py" s referenčním řešením.
+Pro bigDataset je dostupný na https://www.fit.vutbr.cz/~ibordovsky/avs/datasets/bigRefOutput.h5
+
+Krok 0: základní implementace
+=============================
+Celkový čas [s]:                        193.643 s
+Výkon skalárních operací [MFLOPS]:      70.7203
+Výkon vektorových operací [MFLOPS]:     1159.34
+L1 miss [%]:                            83.746
+L2 miss [%]:                            99.954
+L3 miss [%]:                             0.007
+
+Které PAPI_EVENTS jste použili pro získání počtu výpadků v paměti?
+HW countery pro L1: PAPI_L1_DCM|PAPI_LD_INS|PAPI_SR_INS
+HW countery pro L2: PAPI_L2_DCA|PAPI_L2_DCM
+HW countery pro L3: PAPI_L3_TCA|PAPI_L3_TCM
+
+
+Krok 1: vektorizace funkcí
+===================================
+Celkový čas [s]:                        78.333 s
+Výkon skalárních operací [MFLOPS]:      0.0951211
+Výkon vektorových operací [MFLOPS]:     2725.29
+L1 miss [%]:                             6.109
+L2 miss [%]:                            86.329
+L3 miss [%]:                             0.045
+
+Jaké pragmy bylo potřeba přidat?
+#pragma omp declare simd
+#pragma omp simd
+
+Které dovětky k pragmám jste použili a jaky měly vliv na kompilátorem generované funkce? (main.cpp.optrpt/neuron.cpp.optrpt)
+linear(neuronId: 1)     - premenna ktora sa konstantne meni pocas cyklu, pripravi data pred volanim cyklu a urychli vypocet
+uniform(inputSize, neuronCount, input, weight)  - Nemeniace sa hodnoty, urychluje vypocet pretoze pripravi data pred volanim cyklu
+simdlen(64)     - velkost vektorovaneho registru. 64 znizilo pocet cache misses na nizsiu hodnotu, predlzilo ale cas celkoveho vypoctu v porovnani s nizsimi hodnotami
+
+
+Krok 2: přístupy do paměti
+=============================
+a) S dovětky
+(Sepište všechyn použité dovětky):  uniform(inputSize, input) simdlen(64)
+
+Celkový čas [s]:                        82.2888 s
+Výkon skalárních operací [MFLOPS]:      0.0913098
+Výkon vektorových operací [MFLOPS]:     2616.24
+L1 miss [%]:                            29.645
+L2 miss [%]:                            13.125
+L3 miss [%]:                             0.124
+
+b) Bez dovětků
+Některé dovětky maji negativní dopad na výkon, přestože kompilátor tvrdí opak. Které?
+
+Kompilátor pri porovnaní simdlen(64) a simdlen(16) zvolil #pragma so simdlen(64), aj napriek tomu, že výpočet trvá porovnatelne dlhšie
+a je menej výkonný. Preto sme vzolili sidlen(16) aj napriek výberu kompilátora, a ponechali v kóde iba túto pragmu
+
+Celkový čas [s]:                        53.1209 s
+Výkon skalárních operací [MFLOPS]:      0.140407
+Výkon vektorových operací [MFLOPS]:     4078.37
+L1 miss [%]:                             7.152
+L2 miss [%]:                            20.670
+L3 miss [%]:                             0.023
+
+
+Krok 3.1: přesun #pragma omp simd
+===================================
+Celkový čas [s]:                        22.7599 s
+Výkon skalárních operací [MFLOPS]:      302.254
+Výkon vektorových operací [MFLOPS]:     14184.2
+L1 miss [%]:                            15.144
+L2 miss [%]:                            51.738
+L3 miss [%]:                             0.059
+
+Jaký dovětek je potřeba přidat?
+reduction(+:sum)
+
+Krok 3.2: vykonání po vrstvách místo po obrázcích
+===================================
+Celkový čas [s]:                        21.5414 s
+Výkon skalárních operací [MFLOPS]:      180.788
+Výkon vektorových operací [MFLOPS]:     15302
+L1 miss [%]:                            14.058
+L2 miss [%]:                            53.232
+L3 miss [%]:                             0.205
+
+Popište, jaký dopad na výkon mají výpadky v cache.
+Cache sa stara o urychleny pristup do pamate, v pripade jej vypadkov je potrebne opakovane pristupovat do pamate, v pripade
+vypadkov vo vsetkych vrstvach cache je potrebne pristupovat do pomalsej pamate, co ma za dosledok znizenie vykonu
+
+Krok 4: režie funkcí, zarovnání paměti
+===================================
+Celkový čas [s]:                        20.0412 s
+Výkon skalárních operací [MFLOPS]:      24.9443
+Výkon vektorových operací [MFLOPS]:     16948.4
+L1 miss [%]:                            15.939
+L2 miss [%]:                            60.425
+L3 miss [%]:                             0.143
+
+Proč není zrychlení již výrazné? Na jaké typy problémů cílí tyto optimalizace?
+Zrychlenie nie je tak vyrazne, pretoze vykon je obmedzeny taktiez vykonom vymedzenym pre beh programu, nie len optimalnym kodom.
+Optimalizacia je zamerana prevazne na spravny pristup do pamati.
+Optimalizacia dalej riesi vektorizaciu, takze je mozne spracovavat vacsie mnozstvo dat sucastne,
+co ma za nasledok urychlenie programu.

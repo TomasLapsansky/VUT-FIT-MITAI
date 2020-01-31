@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="kataster" default="all">
+  
+  
+  <property file="kataster.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*.yarb/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.egg"/>
+    <include name="*.jar"/>
+    <include name="*.ear"/>
+    <include name="*.ane"/>
+    <include name="*.klib"/>
+    <include name="*.swc"/>
+    <include name="*.war"/>
+    <include name="*.zip"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.10" value="${jdk.home.10}/bin"/>
+  <path id="jdk.classpath.10">
+    <fileset dir="${jdk.home.10}">
+      <include name="../Home!/java.activation"/>
+      <include name="../Home!/java.base"/>
+      <include name="../Home!/java.compiler"/>
+      <include name="../Home!/java.corba"/>
+      <include name="../Home!/java.datatransfer"/>
+      <include name="../Home!/java.desktop"/>
+      <include name="../Home!/java.instrument"/>
+      <include name="../Home!/java.jnlp"/>
+      <include name="../Home!/java.logging"/>
+      <include name="../Home!/java.management"/>
+      <include name="../Home!/java.management.rmi"/>
+      <include name="../Home!/java.naming"/>
+      <include name="../Home!/java.prefs"/>
+      <include name="../Home!/java.rmi"/>
+      <include name="../Home!/java.scripting"/>
+      <include name="../Home!/java.se"/>
+      <include name="../Home!/java.se.ee"/>
+      <include name="../Home!/java.security.jgss"/>
+      <include name="../Home!/java.security.sasl"/>
+      <include name="../Home!/java.smartcardio"/>
+      <include name="../Home!/java.sql"/>
+      <include name="../Home!/java.sql.rowset"/>
+      <include name="../Home!/java.transaction"/>
+      <include name="../Home!/java.xml"/>
+      <include name="../Home!/java.xml.bind"/>
+      <include name="../Home!/java.xml.crypto"/>
+      <include name="../Home!/java.xml.ws"/>
+      <include name="../Home!/java.xml.ws.annotation"/>
+      <include name="../Home!/javafx.base"/>
+      <include name="../Home!/javafx.controls"/>
+      <include name="../Home!/javafx.deploy"/>
+      <include name="../Home!/javafx.fxml"/>
+      <include name="../Home!/javafx.graphics"/>
+      <include name="../Home!/javafx.media"/>
+      <include name="../Home!/javafx.swing"/>
+      <include name="../Home!/javafx.web"/>
+      <include name="../Home!/jdk.accessibility"/>
+      <include name="../Home!/jdk.aot"/>
+      <include name="../Home!/jdk.attach"/>
+      <include name="../Home!/jdk.charsets"/>
+      <include name="../Home!/jdk.compiler"/>
+      <include name="../Home!/jdk.crypto.cryptoki"/>
+      <include name="../Home!/jdk.crypto.ec"/>
+      <include name="../Home!/jdk.deploy"/>
+      <include name="../Home!/jdk.deploy.controlpanel"/>
+      <include name="../Home!/jdk.dynalink"/>
+      <include name="../Home!/jdk.editpad"/>
+      <include name="../Home!/jdk.hotspot.agent"/>
+      <include name="../Home!/jdk.httpserver"/>
+      <include name="../Home!/jdk.incubator.httpclient"/>
+      <include name="../Home!/jdk.internal.ed"/>
+      <include name="../Home!/jdk.internal.jvmstat"/>
+      <include name="../Home!/jdk.internal.le"/>
+      <include name="../Home!/jdk.internal.opt"/>
+      <include name="../Home!/jdk.internal.vm.ci"/>
+      <include name="../Home!/jdk.internal.vm.compiler"/>
+      <include name="../Home!/jdk.internal.vm.compiler.management"/>
+      <include name="../Home!/jdk.jartool"/>
+      <include name="../Home!/jdk.javadoc"/>
+      <include name="../Home!/jdk.javaws"/>
+      <include name="../Home!/jdk.jcmd"/>
+      <include name="../Home!/jdk.jconsole"/>
+      <include name="../Home!/jdk.jdeps"/>
+      <include name="../Home!/jdk.jdi"/>
+      <include name="../Home!/jdk.jdwp.agent"/>
+      <include name="../Home!/jdk.jfr"/>
+      <include name="../Home!/jdk.jlink"/>
+      <include name="../Home!/jdk.jshell"/>
+      <include name="../Home!/jdk.jsobject"/>
+      <include name="../Home!/jdk.jstatd"/>
+      <include name="../Home!/jdk.localedata"/>
+      <include name="../Home!/jdk.management"/>
+      <include name="../Home!/jdk.management.agent"/>
+      <include name="../Home!/jdk.management.cmm"/>
+      <include name="../Home!/jdk.management.jfr"/>
+      <include name="../Home!/jdk.management.resource"/>
+      <include name="../Home!/jdk.naming.dns"/>
+      <include name="../Home!/jdk.naming.rmi"/>
+      <include name="../Home!/jdk.net"/>
+      <include name="../Home!/jdk.pack"/>
+      <include name="../Home!/jdk.packager"/>
+      <include name="../Home!/jdk.packager.services"/>
+      <include name="../Home!/jdk.plugin"/>
+      <include name="../Home!/jdk.plugin.server"/>
+      <include name="../Home!/jdk.rmic"/>
+      <include name="../Home!/jdk.scripting.nashorn"/>
+      <include name="../Home!/jdk.scripting.nashorn.shell"/>
+      <include name="../Home!/jdk.sctp"/>
+      <include name="../Home!/jdk.security.auth"/>
+      <include name="../Home!/jdk.security.jgss"/>
+      <include name="../Home!/jdk.snmp"/>
+      <include name="../Home!/jdk.unsupported"/>
+      <include name="../Home!/jdk.xml.bind"/>
+      <include name="../Home!/jdk.xml.dom"/>
+      <include name="../Home!/jdk.xml.ws"/>
+      <include name="../Home!/jdk.zipfs"/>
+      <include name="../Home!/oracle.desktop"/>
+      <include name="../Home!/oracle.net"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.10}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.10}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.10"/>
+  <!-- Register Custom Compiler Taskdefs -->
+  <property name="javac2.home" value="${idea.home}/lib"/>
+  <path id="javac2.classpath">
+    <fileset dir="${javac2.home}">
+      <include name="javac2.jar"/>
+      <include name="jdom.jar"/>
+      <include name="asm-all*.jar"/>
+      <include name="forms-*.jar"/>
+    </fileset>
+  </path>
+  <target name="register.custom.compilers">
+    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
+  </target>
+  
+  <!-- Modules -->
+  
+  
+  <!-- Module Kataster -->
+  
+  <dirname property="module.kataster.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.kataster" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.kataster" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.kataster" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.kataster" value="-encoding UTF-8 -source 10 -target 10 ${compiler.args}"/>
+  
+  <property name="kataster.output.dir" value="${module.kataster.basedir}/out/production/Kataster"/>
+  <property name="kataster.testoutput.dir" value="${module.kataster.basedir}/out/test/Kataster"/>
+  
+  <path id="kataster.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="kataster.module.production.classpath">
+    <path refid="${module.jdk.classpath.kataster}"/>
+    <pathelement location="${basedir}/src/lib/ojdbc10.jar"/>
+    <fileset dir="${basedir}/../../../../../../../../../../../opt/sqldeveloper">
+      <patternset refid="library.patterns"/>
+    </fileset>
+    <pathelement location="${basedir}/../../../../../../../../../app/anton/product/11.2.0/dbhome_1"/>
+    <pathelement location="${basedir}/../../../../../../../../../app/anton/product/11.2.0/dbhome_1/ord/jlib/ordim.jar"/>
+    <pathelement location="${basedir}/src/lib/ordim.jar"/>
+    <pathelement location="${basedir}/src/lib/sdoapi.jar"/>
+    <fileset dir="${basedir}/src/lib/javafx">
+      <patternset refid="library.patterns"/>
+    </fileset>
+  </path>
+  
+  <path id="kataster.runtime.production.module.classpath">
+    <pathelement location="${kataster.output.dir}"/>
+    <pathelement location="${basedir}/src/lib/ojdbc10.jar"/>
+    <fileset dir="${basedir}/../../../../../../../../../../../opt/sqldeveloper">
+      <patternset refid="library.patterns"/>
+    </fileset>
+    <pathelement location="${basedir}/../../../../../../../../../app/anton/product/11.2.0/dbhome_1"/>
+    <pathelement location="${basedir}/../../../../../../../../../app/anton/product/11.2.0/dbhome_1/ord/jlib/ordim.jar"/>
+    <pathelement location="${basedir}/src/lib/ordim.jar"/>
+    <pathelement location="${basedir}/src/lib/sdoapi.jar"/>
+    <fileset dir="${basedir}/src/lib/javafx">
+      <patternset refid="library.patterns"/>
+    </fileset>
+  </path>
+  
+  <path id="kataster.module.classpath">
+    <path refid="${module.jdk.classpath.kataster}"/>
+    <pathelement location="${kataster.output.dir}"/>
+    <pathelement location="${basedir}/src/lib/ojdbc10.jar"/>
+    <fileset dir="${basedir}/../../../../../../../../../../../opt/sqldeveloper">
+      <patternset refid="library.patterns"/>
+    </fileset>
+    <pathelement location="${basedir}/../../../../../../../../../app/anton/product/11.2.0/dbhome_1"/>
+    <pathelement location="${basedir}/../../../../../../../../../app/anton/product/11.2.0/dbhome_1/ord/jlib/ordim.jar"/>
+    <pathelement location="${basedir}/src/lib/ordim.jar"/>
+    <pathelement location="${basedir}/src/lib/sdoapi.jar"/>
+    <fileset dir="${basedir}/src/lib/javafx">
+      <patternset refid="library.patterns"/>
+    </fileset>
+  </path>
+  
+  <path id="kataster.runtime.module.classpath">
+    <pathelement location="${kataster.testoutput.dir}"/>
+    <pathelement location="${kataster.output.dir}"/>
+    <pathelement location="${basedir}/src/lib/ojdbc10.jar"/>
+    <fileset dir="${basedir}/../../../../../../../../../../../opt/sqldeveloper">
+      <patternset refid="library.patterns"/>
+    </fileset>
+    <pathelement location="${basedir}/../../../../../../../../../app/anton/product/11.2.0/dbhome_1"/>
+    <pathelement location="${basedir}/../../../../../../../../../app/anton/product/11.2.0/dbhome_1/ord/jlib/ordim.jar"/>
+    <pathelement location="${basedir}/src/lib/ordim.jar"/>
+    <pathelement location="${basedir}/src/lib/sdoapi.jar"/>
+    <fileset dir="${basedir}/src/lib/javafx">
+      <patternset refid="library.patterns"/>
+    </fileset>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.kataster">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.kataster">
+    <patternset refid="excluded.from.module.kataster"/>
+  </patternset>
+  
+  <path id="kataster.module.sourcepath">
+    <dirset dir="${module.kataster.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.kataster" depends="compile.module.kataster.production,compile.module.kataster.tests" description="Compile module Kataster"/>
+  
+  <target name="compile.module.kataster.production" depends="register.custom.compilers" description="Compile module Kataster; production classes">
+    <mkdir dir="${kataster.output.dir}"/>
+    <javac2 destdir="${kataster.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.kataster}/javac">
+      <compilerarg line="${compiler.args.kataster}"/>
+      <bootclasspath refid="kataster.module.bootclasspath"/>
+      <classpath refid="kataster.module.production.classpath"/>
+      <src refid="kataster.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.kataster"/>
+    </javac2>
+    
+    <copy todir="${kataster.output.dir}">
+      <fileset dir="${module.kataster.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.kataster.tests" depends="register.custom.compilers,compile.module.kataster.production" description="compile module Kataster; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.kataster" description="cleanup module">
+    <delete dir="${kataster.output.dir}"/>
+    <delete dir="${kataster.testoutput.dir}"/>
+  </target>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.kataster, clean.artifact.kataster" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.kataster" description="build all modules"/>
+  
+  <target name="init.artifacts">
+    <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+    <property name="artifact.output.kataster" value="${basedir}/out/artifacts/Kataster"/>
+    <mkdir dir="${artifacts.temp.dir}"/>
+    <property name="artifact.temp.output.Kataster" value="${artifacts.temp.dir}/Kataster.jar"/>
+    <taskdef resource="com/sun/javafx/tools/ant/antlib.xml" uri="javafx:com.sun.javafx.tools.ant" classpath="${jdk.home.10}/lib/ant-javafx.jar"/>
+  </target>
+  
+  <target name="clean.artifact.kataster" description="clean Kataster artifact output">
+    <delete dir="${artifact.output.kataster}"/>
+  </target>
+  
+  <target name="artifact.kataster" depends="init.artifacts, compile.module.kataster" description="Build &#39;Kataster&#39; artifact" xmlns:fx="javafx:com.sun.javafx.tools.ant">
+    <mkdir dir="${artifact.output.kataster}"/>
+    <copy todir="${artifact.temp.output.Kataster}">
+      <fileset dir="${kataster.output.dir}"/>
+    </copy>
+    <fx:fileset id="all_but_Kataster" dir="${artifact.temp.output.Kataster}" includes="**/*.jar">
+      <exclude name="Kataster.jar"/>
+    </fx:fileset>
+    <fx:fileset id="all_Kataster" dir="${artifact.temp.output.Kataster}" includes="**/*.jar"/>
+    <fx:application id="Kataster_id" name="Kataster" mainClass="Main.class"/>
+    <fx:jar destfile="${artifact.temp.output.Kataster}/Kataster.jar">
+      <fx:application refid="Kataster_id"/>
+      <fileset dir="${artifact.temp.output.Kataster}" excludes="**/*.jar"/>
+      <fx:resources>
+        <fx:fileset refid="all_but_Kataster"/>
+      </fx:resources>
+      <manifest>
+        <attribute name="Implementation-Title" value=""/>
+        <attribute name="Implementation-Version" value=""/>
+        <attribute name="Implementation-Vendor" value=""/>
+      </manifest>
+    </fx:jar>
+    <fx:deploy width="600" height="400" updatemode="background" outdir="${artifact.temp.output.Kataster}/deploy" outfile="Kataster">
+      <fx:application refid="Kataster_id"/>
+      <fx:resources>
+        <fx:fileset refid="all_Kataster"/>
+      </fx:resources>
+    </fx:deploy>
+    <copy todir="${artifact.output.kataster}">
+      <fileset dir="${artifact.temp.output.Kataster}/deploy"/>
+    </copy>
+    <delete includeemptydirs="true">
+      <fileset dir="${artifact.temp.output.Kataster}"/>
+    </delete>
+  </target>
+  
+  <target name="build.all.artifacts" depends="artifact.kataster" description="Build all artifacts">
+    
+    <!-- Delete temporary files -->
+    <delete dir="${artifacts.temp.dir}"/>
+  </target>
+  
+  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+</project>

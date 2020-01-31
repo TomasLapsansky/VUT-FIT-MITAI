@@ -1,0 +1,64 @@
+Architektury Výpočetních Systémů (AVS 2019)
+Projekt č. 2 (PMC)
+Login: xlapsa00
+
+Úloha 1: Paralelizace původního řešení
+===============================================================================
+
+1) Kterou ze smyček (viz zadání) je vhodnější paralelizovat a co způsobuje 
+   neefektivitu paralelizaci té druhé?
+
+Vhodnejšie je paralelizovať smyčku vo funkcií marchCubes. Neefektivitu paralelizaácie druhej smyčky spôsobuje nasledovné. Funkcia evaluateFieldAt je volaná vrácmi funkcie buildCube, ktorá je volaná v prvej smyčke. Ak by sme paralelizovali túto smyčku, celý beh programu by zabezpečoval jeden proces, a paralelizovaný by bol len krátky úsek kódu na jednoduchý výpočet. Toto môže mať práve opačný efekt, a teda spomalenie behu programu.
+
+
+2) Jaké plánování (rozdělení práce mezi vlákna) jste zvolili a proč? 
+   Jaký vliv má velikost "chunk" při dynamickém plánování (8, 16, 32, 64)?
+
+Zvolili sme statické plánovanie, pretože zložitosť jednotlivých iterácií cyklu je približne rovnaká.
+
+Veľkosť chunku pri dynamickom plánovní prideľuje počet úloh jednotlivým vláknam. Pri použití väčšej hodnoty chunk size sa implementácia spomaľuje, pretože vlákna sa preplňujú. Niektoré vlákna ostávajú menej vytažené, iné zase viac, nie je medzi nich teda efektívne prerozdelená práca.
+
+3) Jakým způsobem zajišťujete ukládání trojúhelníků z několika vláken současně?
+
+Využitím kritickej sekcie ukladaní hodnôt do premennej totalTriangles. Tá zabezpečí, že zdroje sú zablokované vždy pre jeden proces a ostatné čakajú.
+
+Úloha 2: Paralelní průchod stromem
+===============================================================================
+
+1) Stručně popište použití OpenMP tasků ve vašem řešení.
+
+Paralelizácia sa spúšta pred prvým volaním funkcie evalTree(), pre túto funkciu je taktiež nastavená pragma omp single, ktorá zabezpečí, že beh tejto funkcie bude pridelený iba jednému jadru. Funkcia po overení niekoľkých podmienok rozďeluje pomocou vnorených cyklov priestor na 8 pod kociek, kde je každému podpriestoru pridelený vlastný task, v ktorom je rekurzívne volaná funkcia evalTree pre menší priestor. Jednotlivé tasky a hlavný proces obsahujú taktiež pragmu omp taskwait, ktorá zabezpečí počkanie na ukončenie všetkých dcérskych taskov pred vrátením návratovej hodnoty.
+
+2) Jakým způsobem jste realizovali sesbírání celkového počtu trojúhelníků?
+
+Rekurzívne volaná funkcia evalTree vo svojom tele volá funkciu buildCube pre kocky s minimálnou dĺžkou hrany. Táto funkcia vracia počet trojuholníkov pre danú kocku, a táto hodnota je rekurzívne vracaná do predošlých volaní funkcie a prirátaná k hodnotám ostatných kociek. Pomocou taskwait je zabezpečené, že sa vždy čaká na návratové hodnoty zo všetkých subtaskov. Takto sa hodnoty dostanú až ku hlavnému procesu.
+
+3) Jaký vliv má na vaše řešení tzv. "cut-off"? Je vhodné vytvářet nový 
+   task pro každou krychli na nejnižší úrovni?
+
+Cut-off urýchľuje výpočet riešenia, keďže vymedzuje už vačšie kocky, ktoré nebude potrebné vykresľovať bez toho, aby bolo potrebné prejsť každú kocku o najmenšej veľkosti, ktorá sa v tomto priestore nachádza. A však kocky, kde je potrebné niečo vykresľovať prejdené budú.
+Tasky je vhodné vytvárať aj na najnižšej úrovni, keďže dochádza k efektívnej paralelizácií riešenia.
+
+4) Jakým způsobem zajišťujete ukládání trojúhelníků z několika vláken současně?
+
+Ukladanie trojholníkov je umiestnené v kritickej sekcií, ktorá zabezpečuje výlučný prístup jedného procesu v konkrétnom čase.
+
+
+Úloha 3: Grafy škálování obou řešení
+===============================================================================
+
+1) Stručně zhodnoťte efektivitu vytvořených řešení (na základě grafů škálování).
+
+Obe riešenia vykazujú očakávaný nárast času výpočtu vzhľadom na počet elementov v mriežke.
+Pri vykreslení počtu elementov rádovo v stovkách až tisícoch sa javí byť efektívnejším OpenMP loop, zatiaľ čo Octree je efektívnejší pri výpočtoch s vyšším počtom bodov. Podľa grafu sa okolie bodu 2^11 elementov javí ako zlomové, kde je už lepšie použiť Octree.
+Je dôležité však podotknúť, že aj napriek týmto jemným rozdielom v algoritmoch je ich efektivita rádovo podobná.
+
+2) V jakém případě (v závislosti na počtu bodů ve vstupním souboru a velikosti 
+   mřížky) bude vaše řešení 1. úlohy neefektivní? (pokud takový případ existuje)
+
+OpenMP prejavuje zvýšenú neefektivitu pri vysokom počte jadier a malej veľkosti vstupného súboru.
+
+3) Je (nebo není) stromový algoritmus efektivnější z pohledu slabého škálování 
+   vzhledem ke vstupu?
+
+Octree sa javí z pohľadu slabého škálovania menej efektívny ako OpenMP loop, keďže OpenMP loop prejavu konštantnú časovú náročnosť nezávysle na počte využitých jadier.
