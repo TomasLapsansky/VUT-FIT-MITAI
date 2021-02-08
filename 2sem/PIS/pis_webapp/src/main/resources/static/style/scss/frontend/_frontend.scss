@@ -1,0 +1,131 @@
+header {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  max-height: 100px;
+
+  a img {
+    max-width: 250px;
+  }
+
+  div.cart-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 5%;
+    font-size: 20px;
+
+    i{
+      padding: 10px;
+    }
+  }
+}
+
+#main-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f4f1f7;
+}
+
+#content-holder {
+  max-width: 1300px;
+  width: 100%;
+  display: flex;
+  background: white;
+  border: 2px solid #eae4ee;
+  border-radius: 8px;
+  margin-top: 40px;
+  margin-bottom: 80px;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
+
+  #menu-sidebar {
+    width: 200px;
+    border-right: 2px solid #eae4ee;
+    box-sizing: border-box;
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        border-bottom: 2px solid #eae4ee;
+
+        &:hover {
+          background: #eae4ee;
+        }
+
+        a {
+          color: black;
+          text-decoration: none;
+          padding: 8px 12px;
+          display: block;
+
+          &:hover {
+            text-decoration: none;
+          }
+
+        }
+      }
+    }
+  }
+
+  div.content-area {
+    width: calc(100% - 200px);
+  }
+
+}
+
+div.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding: 12px;
+}
+
+div.product-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid #eae4ee;
+  max-width: 250px;
+  width: 100%;
+  padding: 20px;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
+  margin-bottom: 24px;
+
+  div.img-holder {
+    display: flex;
+    width: 210px;
+    height: 210px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  img {
+    max-width: 210px;
+    max-height: 210px;
+  }
+
+  div.img-placeholder {
+    width: 210px;
+    height: 210px;
+    background: #e0e0e0;
+  }
+
+}
+
+@import "landing_page";
+@import "product_detail";
+@import "cart";
+@import "checkout";
+@import "category-product-list";
+@import "login-page";
+@import "registration-page";
+@import "my-account";

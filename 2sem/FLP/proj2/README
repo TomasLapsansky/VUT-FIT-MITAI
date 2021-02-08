@@ -1,0 +1,14 @@
+# Project 2 - FLP 2020 - NTS
+# Author: Tomas Lapsansky (xlapsa00)
+# Brno university of technology
+
+Aplikacia implementuje simulaciu nedeterministickeho turingovho stroja (NTS) v jazyku prolog.
+
+K aplikacii su prilozene testovacie subory (meranie casu - prikaz time):
+    test1   - referencny test zo zadania                - 0.048s
+    test2   - overenie blank symbolu                    - 0.072s
+    test3   - zapis za koniec vstupu na paske           - 0.049s
+    test4   - nepovoleny posun dolava (konci chybou)    - 0.061s
+    test5   - viacnasobne posuny doprava a dolava       - 0.060s
+    test6   - referencny test + overenie nedeterminizmu - 0.053s
+    

@@ -1,0 +1,43 @@
+#cart {
+
+  width: 100%;
+  padding: 12px;
+
+  table.cart-list {
+
+    width: 100%;
+
+    tr.cart-item {
+
+      border-top: 2px solid #eae4ee;
+      border-bottom: 2px solid #eae4ee;
+
+      img {
+        max-height: 100px;
+        max-width: 100px;
+      }
+
+      div.img-placeholder {
+        width: 100px;
+        height: 100px;
+        background: #e0e0e0;
+      }
+
+      i {
+        cursor: pointer;
+      }
+
+    }
+  }
+
+  span.price-total {
+    display: block;
+    text-align: right;
+    margin-top: 24px;
+  }
+
+  a.btn {
+    float: right;
+    margin-top: 8px;
+  }
+}

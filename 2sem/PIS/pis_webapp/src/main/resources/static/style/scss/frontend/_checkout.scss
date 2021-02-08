@@ -1,0 +1,44 @@
+#checkout {
+  width: 100%;
+  padding: 24px;
+
+  div.col-md-6 {
+    padding: 0 12px;
+  }
+
+  table.cart-list {
+
+    width: 100%;
+
+    tr.cart-item {
+
+      border-top: 2px solid #eae4ee;
+      border-bottom: 2px solid #eae4ee;
+
+      img {
+        max-height: 100px;
+        max-width: 100px;
+      }
+
+      div.img-placeholder {
+        width: 100px;
+        height: 100px;
+        background: #e0e0e0;
+      }
+
+      i {
+        cursor: pointer;
+      }
+
+    }
+  }
+
+}
+
+#order-summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 24px;
+}
